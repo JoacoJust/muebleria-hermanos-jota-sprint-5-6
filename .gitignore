@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build & coverage
+build/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS & editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Brand kit / media (no commitear videos pesados)
+docs/brand-kit/**/*.mp4
+docs/brand-kit/**/*.mov
+**/*Video*institucional*
+
+# Temp
+*.tmp
+.cache/

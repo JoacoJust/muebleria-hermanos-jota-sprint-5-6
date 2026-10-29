@@ -1,0 +1,6 @@
+node_modules/
+legacy/
+client/build/
+coverage/
+docs/brand-kit/*.png
+docs/brand-kit/Manual_Marca.pdf

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambios del TP - Mueblería Hermanos Jota</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #fff;
+        }
+        h1 {
+            color: #A0522D;
+            border-bottom: 3px solid #A0522D;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #87A96B;
+            margin-top: 30px;
+            border-bottom: 2px solid #87A96B;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #33251F;
+            margin-top: 20px;
+        }
+        .highlight {
+            background: #F5E6D3;
+            padding: 15px;
+            border-left: 4px solid #A0522D;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .before-after {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .before, .after {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .before {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+        }
+        .after {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+        }
+        .before h4, .after h4 {
+            margin-top: 0;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #A0522D;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media print {
+            body {
+                padding: 20px;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Cambios del Trabajo Práctico</h1>
+    <h2>Mueblería Hermanos Jota - Sprint 3-4</h2>
+    <p><strong>Curso:</strong> Desarrollo Web Full Stack (ITBA)</p>
+    <p><strong>Equipo:</strong> Joaquín Just, Ruiz Díaz Agostina, Marcos Ford, Rocío Lazo</p>
+
+    <div class="highlight">
+        <h3>📋 Resumen General</h3>
+        <p>Este documento explica en palabras sencillas los cambios realizados entre el TP anterior (Sprint 1-2) y el TP actual (Sprint 3-4). La transformación más importante fue pasar de un <strong>sitio estático</strong> a una <strong>aplicación cliente-servidor completa</strong> con backend propio.</p>
+    </div>
+
+    <h2>1. Arquitectura: De Estático a Dinámico</h2>
+
+    <div class="before-after">
+        <div class="before">
+            <h4>❌ Antes (Sprint 1-2)</h4>
+            <ul>
+                <li>Sitio estático con HTML, CSS y JavaScript puro</li>
+                <li>Datos de productos "quemados" en el código JavaScript</li>
+                <li>Un solo archivo HTML con todo mezclado</li>
+                <li>Sin servidor backend</li>
+                <li>Sin separación de responsabilidades</li>
+            </ul>
+        </div>
+        <div class="after">
+            <h4>✅ Ahora (Sprint 3-4)</h4>
+            <ul>
+                <li>Aplicación cliente-servidor con React + Node.js/Express</li>
+                <li>Backend propio con API REST para servir datos</li>
+                <li>Frontend React modular con componentes</li>
+                <li>Datos servidos dinámicamente desde el servidor</li>
+                <li>Separación clara: /backend y /client</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>2. Backend: Nuevo Servidor con Express</h2>
+
+    <div class="highlight">
+        <h3>¿Qué es el backend?</h3>
+        <p>El backend es el "cerebro" del servidor. Antes no existía; ahora creamos un servidor con Node.js y Express que se encarga de:</p>
+        <ul>
+            <li>Recibir peticiones del frontend</li>
+            <li>Buscar los datos de productos</li>
+            <li>Devolver la información en formato JSON</li>
+            <li>Manejar errores (404, 400, 500)</li>
+        </ul>
+    </div>
+
+    <h3>Endpoints de la API (nuevas rutas)</h3>
+    <table>
+        <tr>
+            <th>Ruta</th>
+            <th>Qué hace</th>
+            <th>Estado</th>
+        </tr>
+        <tr>
+            <td>GET /api/productos</td>
+            <td>Devuelve todos los productos</td>
+            <td>JSON con array de productos</td>
+        </tr>
+        <tr>
+            <td>GET /api/productos/:id</td>
+            <td>Devuelve un producto específico</td>
+            <td>JSON con un producto o 404</td>
+        </tr>
+        <tr>
+            <td>GET /images/:archivo</td>
+            <td>Sirve las imágenes de los productos</td>
+            <td>Archivo de imagen</td>
+        </tr>
+    </table>
+
+    <h3>Middleware (nuevo concepto)</h3>
+    <p>Los middleware son funciones que se ejecutan antes de llegar a las rutas. Implementamos:</p>
+    <ul>
+        <li><strong>Logger:</strong> Registra cada petición (método y URL) en la consola</li>
+        <li><strong>express.json():</strong> Convierte el cuerpo de las peticiones a JSON (para futuros POST)</li>
+        <li><strong>CORS:</strong> Permite que el frontend (puerto 3000) hable con el backend (puerto 4000)</li>
+        <li><strong>Helmet:</strong> Agrega headers de seguridad</li>
+        <li><strong>Manejador de 404:</strong> Devuelve error JSON cuando no existe la ruta</li>
+        <li><strong>Manejador de errores:</strong> Centraliza el manejo de errores</li>
+    </ul>
+
+    <h2>3. Frontend: Reconstrucción con React</h2>
+
+    <div class="highlight">
+        <h3>¿Por qué React?</h3>
+        <p>Reconstruimos todo el frontend desde cero usando React porque:</p>
+        <ul>
+            <li>Permite crear componentes reutilizables</li>
+            <li>Maneja el estado de forma eficiente</li>
+            <li>Facilita la actualización de la UI cuando cambian los datos</li>
+            <li>Es el estándar moderno para desarrollo frontend</li>
+        </ul>
+    </div>
+
+    <h3>Componentes (nueva arquitectura)</h3>
+    <p>Antes teníamos un JavaScript monolítico. Ahora tenemos componentes modulares:</p>
+    <table>
+        <tr>
+            <th>Componente</th>
+            <th>Responsabilidad</th>
+        </tr>
+        <tr>
+            <td>Navbar</td>
+            <td>Barra de navegación con contador del carrito</td>
+        </tr>
+        <tr>
+            <td>Footer</td>
+            <td>Pie de página con información de contacto</td>
+        </tr>
+        <tr>
+            <td>ProductCard</td>
+            <td>Tarjeta individual de un producto</td>
+        </tr>
+        <tr>
+            <td>ProductList</td>
+            <td>Lista de productos con filtros</td>
+        </tr>
+        <tr>
+            <td>ProductDetail</td>
+            <td>Vista detallada de un producto</td>
+        </tr>
+        <tr>
+            <td>ContactForm</td>
+            <td>Formulario de contacto controlado</td>
+        </tr>
+    </table>
+
+    <h2>4. Estado y Hooks (nuevo concepto)</h2>
+
+    <div class="highlight">
+        <h3>¿Qué es el estado?</h3>
+        <p>El estado es la "memoria" de la aplicación. Antes manipulábamos el DOM directamente. Ahora usamos <strong>hooks</strong> de React para manejar el estado de forma declarativa.</p>
+    </div>
+
+    <h3>useState</h3>
+    <p>Es el hook más básico. Sirve para guardar información que puede cambiar:</p>
+    <ul>
+        <li><strong>En ContactForm:</strong> Guarda los valores del formulario (nombre, email, mensaje)</li>
+        <li><strong>En ProductList:</strong> Guarda los filtros (búsqueda, categoría, precio)</li>
+        <li><strong>En App.js:</strong> Guarda el estado del carrito</li>
+    </ul>
+
+    <h3>Carrito de Compras</h3>
+    <div class="before-after">
+        <div class="before">
+            <h4>❌ Antes</h4>
+            <ul>
+                <li>Usaba Context API</li>
+                <li>Proveedor global en toda la app</li>
+                <li>Más complejo de entender</li>
+            </ul>
+        </div>
+        <div class="after">
+            <h4>✅ Ahora</h4>
+            <ul>
+                <li>Estado en App.js</li>
+                <li>Pasado como props a través de Layout</li>
+                <li>Usa Outlet context de React Router</li>
+                <li>Más simple y explícito</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>5. Fetch y API (comunicación cliente-servidor)</h2>
+
+    <div class="highlight">
+        <h3>¿Qué es fetch?</h3>
+        <p>Fetch es la forma en que el frontend "pide" datos al backend. Antes los datos estaban en el mismo archivo JavaScript. Ahora:</p>
+        <ul>
+            <li>El frontend hace una petición HTTP al backend</li>
+            <li>El backend responde con los datos en JSON</li>
+            <li>El frontend muestra los datos en la pantalla</li>
+        </ul>
+    </div>
+
+    <h3>Estados de la petición</h3>
+    <p>Implementamos tres estados para la petición fetch:</p>
+    <ul>
+        <li><strong>Loading:</strong> Muestra un spinner mientras carga</li>
+        <li><strong>Error:</strong> Muestra un mensaje de error si falla</li>
+        <li><strong>Success:</strong> Muestra los datos cuando llegan</li>
+    </ul>
+
+    <h2>6. Formulario de Contacto</h2>
+
+    <div class="before-after">
+        <div class="before">
+            <h4>❌ Antes</h4>
+            <ul>
+                <li>Usaba react-hook-form (librería externa)</li>
+                <li>Usaba zod para validación (librería externa)</li>
+                <li>Más dependencias de las necesarias</li>
+            </ul>
+        </div>
+        <div class="after">
+            <h4>✅ Ahora</h4>
+            <ul>
+                <li>Inputs controlados con useState puro</li>
+                <li>Validación manual en utils/validateContact.js</li>
+                <li>Sin dependencias externas para el formulario</li>
+                <li>Más simple y comprensible</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>7. Enrutamiento con React Router</h2>
+
+    <div class="highlight">
+        <h3>¿Qué es React Router?</h3>
+        <p>Antes no había navegación real. Ahora usamos React Router para:</p>
+        <ul>
+            <li>Navegar entre páginas sin recargar</li>
+            <li>Tener URLs distintas para cada vista</li>
+            <li>Manejar rutas con parámetros (ej: /producto/:id)</li>
+        </ul>
+    </div>
+
+    <h3>Rutas implementadas</h3>
+    <table>
+        <tr>
+            <th>Ruta</th>
+            <th>Vista</th>
+        </tr>
+        <tr>
+            <td>/</td>
+            <td>Home (página de inicio)</td>
+        </tr>
+        <tr>
+            <td>/productos</td>
+            <td>Catálogo de productos</td>
+        </tr>
+        <tr>
+            <td>/producto/:id</td>
+            <td>Detalle de producto</td>
+        </tr>
+        <tr>
+            <td>/carrito</td>
+            <td>Carrito de compras</td>
+        </tr>
+        <tr>
+            <td>/contacto</td>
+            <td>Formulario de contacto</td>
+        </tr>
+    </table>
+
+    <h2>8. Testing (nuevo)</h2>
+
+    <div class="highlight">
+        <h3>¿Por qué tests?</h3>
+        <p>Antes no había tests. Ahora implementamos pruebas automatizadas para asegurar que el código funciona correctamente:</p>
+    </div>
+
+    <h3>Backend (Jest + Supertest)</h3>
+    <ul>
+        <li>Test de endpoint /api/productos</li>
+        <li>Test de endpoint /api/productos/:id</li>
+        <li>Test de validación de IDs inválidos</li>
+        <li>Test de 404 cuando no existe el producto</li>
+        <li>Test de JSON malformado</li>
+    </ul>
+
+    <h3>Frontend (React Testing Library)</h3>
+    <ul>
+        <li>Test de ProductList (estados loading, error, vacío)</li>
+        <li>Test de ContactForm (validación)</li>
+        <li>Test de Navbar (contador del carrito)</li>
+        <li>Test de ProductDetail (renderizado condicional)</li>
+        <li>Test de useCart (lógica del carrito)</li>
+        <li>Test de useProducts (fetch)</li>
+    </ul>
+
+    <h2>9. Calidad de Código (nuevo)</h2>
+
+    <div class="highlight">
+        <h3>Herramientas de calidad</h3>
+        <p>Implementamos herramientas para mantener el código limpio y consistente:</p>
+    </div>
+
+    <ul>
+        <li><strong>ESLint:</strong> Detecta errores y malas prácticas</li>
+        <li><strong>Prettier:</strong> Formatea el código automáticamente</li>
+        <li><strong>Husky:</strong> Git hooks que se ejecutan antes de commit</li>
+        <li><strong>lint-staged:</strong> Lintea solo los archivos modificados</li>
+        <li><strong>commitlint:</strong> Valida los mensajes de commit (Conventional Commits)</li>
+    </ul>
+
+    <h2>10. CI/CD con GitHub Actions (nuevo)</h2>
+
+    <div class="highlight">
+        <h3>¿Qué es CI/CD?</h3>
+        <p>Continuous Integration / Continuous Deployment. Antes no existía. Ahora:</p>
+        <ul>
+            <li>Cada vez que se hace push, GitHub ejecuta los tests automáticamente</li>
+            <li>Si un test falla, se avisa inmediatamente</li>
+            <li>Garantiza que el código siempre funcione</li>
+        </ul>
+    </div>
+
+    <h2>11. Eliminación de Código Legacy</h2>
+
+    <div class="highlight">
+        <h3>Carpeta legacy/</h3>
+        <p>Eliminamos completamente la carpeta <code>legacy/</code> que contenía el sitio estático de los Sprints 1-2. Esto significa:</p>
+        <ul>
+            <li>No hay código viejo mezclado con el nuevo</li>
+            <li>El repositorio está limpio y organizado</li>
+            <li>Solo existe la versión actual con React + Express</li>
+        </ul>
+    </div>
+
+    <h2>12. Documentación Mejorada</h2>
+
+    <ul>
+        <li><strong>README.md:</strong> Instrucciones completas de instalación y ejecución</li>
+        <li><strong>api-contract.md:</strong> Documentación de la API REST</li>
+        <li><strong>AUDITORIA.md:</strong> Plan de pruebas adversariales</li>
+        <li><strong>USO-DE-IA.md:</strong> Registro transparente del uso de IA</li>
+        <li><strong>CONTRIBUTING.md:</strong> Guía para contribuir al proyecto</li>
+    </ul>
+
+    <h2>13. Kit de Marca Oficial</h2>
+
+    <div class="highlight">
+        <h3>Integración de marca</h3>
+        <p>Antes usábamos SVGs de reemplazo. Ahora:</p>
+        <ul>
+            <li>Usamos fotos reales del kit de marca oficial</li>
+            <li>Colores oficiales: Siena Tostado, Verde Salvia, Alabastro Cálido</li>
+            <li>Tipografía: Playfair Display (títulos) e Inter (cuerpo)</li>
+            <li>Voz de marca cálida y sofisticada</li>
+        </ul>
+    </div>
+
+    <h2>Resumen de Cambios Principales</h2>
+
+    <table>
+        <tr>
+            <th>Aspecto</th>
+            <th>Antes (Sprint 1-2)</th>
+            <th>Ahora (Sprint 3-4)</th>
+        </tr>
+        <tr>
+            <td>Arquitectura</td>
+            <td>Sitio estático</td>
+            <td>Cliente-servidor (React + Express)</td>
+        </tr>
+        <tr>
+            <td>Backend</td>
+            <td>No existía</td>
+            <td>API REST con Node.js/Express</td>
+        </tr>
+        <tr>
+            <td>Frontend</td>
+            <td>JavaScript monolítico</td>
+            <td>React modular con componentes</td>
+        </tr>
+        <tr>
+            <td>Datos</td>
+            <td>Quemados en JS</td>
+            <td>Servidos por API REST</td>
+        </tr>
+        <tr>
+            <td>Estado</td>
+            <td>Manipulación directa del DOM</td>
+            <td>Hooks de React (useState)</td>
+        </tr>
+        <tr>
+            <td>Carrito</td>
+            <td>Context API</td>
+            <td>Estado en App.js con props</td>
+        </tr>
+        <tr>
+            <td>Formulario</td>
+            <td>react-hook-form + zod</td>
+            <td>useState + validación manual</td>
+        </tr>
+        <tr>
+            <td>Enrutamiento</td>
+            <td>No existía</td>
+            <td>React Router</td>
+        </tr>
+        <tr>
+            <td>Testing</td>
+            <td>No existía</td>
+            <td>Jest + Supertest + RTL</td>
+        </tr>
+        <tr>
+            <td>Calidad</td>
+            <td>Manual</td>
+            <td>ESLint, Prettier, Husky, commitlint</td>
+        </tr>
+        <tr>
+            <td>CI/CD</td>
+            <td>No existía</td>
+            <td>GitHub Actions</td>
+        </tr>
+        <tr>
+            <td>Imágenes</td>
+            <td>SVGs de reemplazo</td>
+            <td>Fotos reales del kit de marca</td>
+        </tr>
+    </table>
+
+    <h2>Conclusión</h2>
+
+    <div class="highlight">
+        <p>La transformación del Sprint 1-2 al Sprint 3-4 representa un salto cualitativo importante: pasamos de un sitio estático básico a una aplicación web moderna con arquitectura cliente-servidor, backend propio, frontend con React, testing automatizado, y herramientas de calidad de código. Este es el tipo de aplicación que se encuentra en el mundo real del desarrollo web profesional.</p>
+    </div>
+
+    <div class="footer">
+        <p><strong>Mueblería Hermanos Jota - Sprint 3-4</strong></p>
+        <p>Curso: Desarrollo Web Full Stack (ITBA)</p>
+        <p>Equipo: Joaquín Just, Ruiz Díaz Agostina, Marcos Ford, Rocío Lazo</p>
+    </div>
+</body>
+</html>
