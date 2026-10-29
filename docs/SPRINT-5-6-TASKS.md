@@ -1,16 +1,41 @@
-# Sprint 5 y 6 — Lista de tareas (borrar al final del sprint)
+# Sprint 5 y 6 — Informe de tareas (puedes borrar este archivo)
 
-Estado del sprint "Persistencia de Datos y CRUD Completo". ✅ COMPLETADO — puedes borrar este archivo.
+Objetivo cumplido: "Persistencia de Datos y CRUD Completo" — API Express conectada a MongoDB con Mongoose, CRUD completo de productos y frontend React con formularios + React Router.
 
-- [x] FASE 1 — Backend: base y conexión
-- [x] FASE 2 — Backend: modelo Mongoose + CRUD + seed (node --check OK, 11/11 tests OK; curl vivo pendiente de MONGODB_URI real)
-- [x] FASE 3 — Frontend: services/api.js
-- [x] FASE 4 — Frontend: rutas React Router + Navbar
-- [x] FASE 5 — Frontend: ProductoForm, useNavigate, confirm eliminar, vercel.json (build `Compiled successfully`, 29/29 tests client)
-- [x] FASE 6 — README.md
-- [x] Informe final entregado en la conversación
+## Estado final: TODAS LAS FASES COMPLETADAS Y VERIFICADAS EN VIVO
 
-Adaptaciones registradas:
-- CRA (no Vite): variable `REACT_APP_API_URL` (no `VITE_API_URL`).
-- Puertos: backend 4000 / client 3000 (como estaba el proyecto); el documento del sprint proponía 3000/5173 (Vite) pero colisiona con CRA.
-- Ids de MongoDB (`_id` string) normalizados en `services/api.js` para no reescribir carrito y estilos.
+- [x] FASE 1 — Backend: base y conexión (`config/db.js`, server.js, CORS con allowlist, health check, 404)
+- [x] FASE 2 — Backend: modelo `Product` (Mongoose) + CRUD completo + `seed.js` con 8 productos reales del proyecto
+- [x] FASE 3 — Frontend: `services/api.js` (5 funciones del CRUD, normaliza ids de Mongo)
+- [x] FASE 4 — Frontend: rutas (`/productos/:id`, `/productos/:id/editar`, `/admin/crear-producto`), Navbar
+- [x] FASE 5 — Frontend: `ProductoForm` controlado, `useNavigate`, confirm eliminar, estados de UI, `vercel.json`, build OK
+- [x] FASE 6 — README.md completo (endpoints, variables, guía de deploy)
+
+## Verificaciones corridas (todos los resultados son reales)
+
+| Verificación                                                                                                   | Resultado                                                                                        |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Jest backend (11 tests)                                                                                        | 11/11 ✅                                                                                         |
+| Jest cliente (29 tests)                                                                                        | 29/29 ✅                                                                                         |
+| `npm run build` (client)                                                                                       | Compiled successfully ✅                                                                         |
+| ESLint                                                                                                         | 0 errores ✅                                                                                     |
+| Arranque falla limpio sin DB                                                                                   | mensaje claro + exit 1 ✅                                                                        |
+| Seed en MongoDB real (local 7.0.14)                                                                            | 8 productos cargados ✅                                                                          |
+| GET todos / por id / 404 / 400                                                                                 | ✅ vía curl en vivo                                                                              |
+| POST válido (201) / POST sin nombre (400) / PUT (200) / PUT precio negativo (400) / DELETE (200, repetido 404) | ✅ vía curl en vivo                                                                              |
+| **Ciclo completo UI → API → DB en navegador**                                                                  | crear (POST 201 + navigate) / editar (PUT + detalle precargado) / eliminar (confirm + DELETE) ✅ |
+
+## Pendiente del dueño del proyecto (requiere cuentas propias)
+
+- [ ] Cluster MongoDB Atlas → reemplazar `MONGODB_URI` en `backend/.env`
+- [ ] Crear servicio en Render (root `backend`; vars `MONGODB_URI`, `CLIENT_URL`)
+- [ ] Importar proyecto en Vercel (root `client`; var `REACT_APP_API_URL=https://tu-backend.onrender.com`)
+- [ ] Actualizar `CLIENT_URL` en Render con la URL final de Vercel
+- [ ] Reemplazar placeholders de links en README.md
+
+## Adaptaciones respecto al documento original del sprint
+
+- CRA (no Vite) → `REACT_APP_API_URL` en lugar de `VITE_API_URL`
+- Puertos: backend 4000 / client 3000 (convención existente del proyecto; evita el salto de puerto de CRA)
+- Contrato de respuesta: `{ mensaje }` y arrays directos, documentado en `docs/api-contract.md`
+- `_id` de Mongo normalizado a `id` en `services/api.js` para mantener carrito y estilos intactos
