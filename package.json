@@ -8,7 +8,7 @@
     "client"
   ],
   "scripts": {
-    "prepare": "husky",
+    "prepare": "husky || exit 0",
     "install:all": "npm install",
     "dev": "concurrently -n api,web -c yellow,cyan \"npm run dev -w hermanos-jota-backend\" \"npm start -w hermanos-jota-client\"",
     "lint": "eslint .",
