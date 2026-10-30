@@ -4,13 +4,21 @@ const react = require("eslint-plugin-react");
 const reactHooks = require("eslint-plugin-react-hooks");
 const eslintConfigPrettier = require("eslint-config-prettier");
 
+const reactRules = {
+  ...react.configs.recommended.rules,
+  ...reactHooks.configs.recommended.rules,
+  "react/react-in-jsx-scope": "off",
+  "react/prop-types": "off",
+};
+
 module.exports = [
   {
     ignores: [
-      "node_modules/**",
+      "**/node_modules/**",
+      "**/build/**",
+      "**/coverage/**",
+      "muebleria-hermanos-jota/**",
       "legacy/**",
-      "client/build/**",
-      "coverage/**",
       "docs/brand-kit/**",
       "scripts/**",
     ],
@@ -18,35 +26,11 @@ module.exports = [
   js.configs.recommended,
   eslintConfigPrettier,
   {
-    files: ["eslint.config.js", "commitlint.config.js", "client/tailwind.config.js", "client/postcss.config.js"],
+    files: ["*.config.js", "backend/**/*.js", "commitlint.config.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-      },
-    },
-  },
-  {
-    ignores: [
-      "node_modules/**",
-      "legacy/**",
-      "client/build/**",
-      "coverage/**",
-      "docs/brand-kit/**",
-      "scripts/**",
-    ],
-  },
-  js.configs.recommended,
-  eslintConfigPrettier,
-  {
-    files: ["backend/**/*.js"],
-    languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-      },
+      globals: { ...globals.node },
     },
     rules: {
       eqeqeq: ["error", "always"],
@@ -56,26 +40,7 @@ module.exports = [
   {
     files: ["backend/**/*.test.js"],
     languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-      },
-    },
-    rules: {
-      eqeqeq: ["error", "always"],
-      "no-var": "error",
-    },
-  },
-  {
-    files: ["commitlint.config.js", "client/tailwind.config.js", "client/postcss.config.js"],
-    languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-      },
+      globals: { ...globals.node, ...globals.jest },
     },
   },
   {
@@ -83,60 +48,31 @@ module.exports = [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
-      parserOptions: {
-        ecmaFeatures: { jsx: true },
-      },
-      globals: {
-        ...globals.browser,
-        ...globals.jest,
-        process: "readonly",
-      },
+      parserOptions: { ecmaFeatures: { jsx: true } },
+      globals: { ...globals.browser, process: "readonly" },
     },
     plugins: {
       react,
       "react-hooks": reactHooks,
     },
-    settings: {
-      react: { version: "detect" },
-    },
+    settings: { react: { version: "detect" } },
     rules: {
       eqeqeq: ["error", "always"],
       "no-var": "error",
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
+      ...reactRules,
     },
   },
   {
-    files: ["client/**/*.test.js", "client/**/*.test.jsx"],
+    files: ["client/**/*.test.{js,jsx}"],
     languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: "module",
-      parserOptions: {
-        ecmaFeatures: { jsx: true },
-      },
-      globals: {
-        ...globals.browser,
-        ...globals.jest,
-        ...globals.node,
-        process: "readonly",
-      },
+      globals: { ...globals.browser, ...globals.jest, ...globals.node },
     },
-    plugins: {
-      react,
-      "react-hooks": reactHooks,
-    },
-    settings: {
-      react: { version: "detect" },
-    },
-    rules: {
-      eqeqeq: ["error", "always"],
-      "no-var": "error",
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
+  },
+  {
+    files: ["client/{postcss,tailwind}.config.js"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: { ...globals.node },
     },
   },
 ];

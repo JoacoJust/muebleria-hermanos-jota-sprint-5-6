@@ -4,10 +4,10 @@ Plataforma de e-commerce para muebles artesanales de fabricación argentina, des
 
 En este sprint se implementó **persistencia de datos y CRUD completo**: la API Express se conecta a **MongoDB Atlas** con **Mongoose**, y el frontend React **crea, edita, elimina y lista** productos mediante formularios y React Router.
 
-## Despliegues (placeholders)
+## Despliegues
 
-- **Frontend (React):** https://muebleria-hermanos-jota-sprint-5-6.vercel.app
-- **Backend (API):** https://muebleria-jota-api-q4ez.onrender.com
+- **Frontend (Vercel):** https://muebleria-hermanos-jota-sprint-5-6.vercel.app
+- **Backend (Render):** https://muebleria-jota-api-q4ez.onrender.com
 
 ## Arquitectura
 
@@ -105,7 +105,7 @@ npm start -w hermanos-jota-client
 2. **Root Directory:** `backend`
 3. **Build Command:** `npm install`
 4. **Start Command:** `npm start`
-5. En **Environment Variables** cargar `MONGODB_URI` (el string de Atlas) y `CLIENT_URL` (por ahora un placeholder; luego se actualiza con la URL de Vercel).
+5. En **Environment Variables** cargar `MONGODB_URI` (el string de Atlas) y `CLIENT_URL` = `https://muebleria-hermanos-jota-sprint-5-6.vercel.app`.
 6. Desplegar y probar: `https://muebleria-jota-api-q4ez.onrender.com/api/productos`.
 
 ### 3) Vercel (frontend)

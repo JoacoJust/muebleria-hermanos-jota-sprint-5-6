@@ -2,7 +2,7 @@
   "name": "muebleria-hermanos-jota",
   "version": "0.2.0",
   "private": true,
-  "description": "E-commerce Hermanos Jota — monorepo Sprint 3-4 (ITBA)",
+  "description": "E-commerce Hermanos Jota — monorepo Sprint 5-6 (ITBA)",
   "workspaces": [
     "backend",
     "client"

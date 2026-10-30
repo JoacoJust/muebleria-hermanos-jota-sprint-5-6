@@ -1,4 +1,10 @@
 node_modules/
+**/node_modules/
+build/
+**/build/
+coverage/
+**/coverage/
+muebleria-hermanos-jota/
 legacy/
 client/build/
 coverage/

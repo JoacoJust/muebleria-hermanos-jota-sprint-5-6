@@ -33,7 +33,7 @@ export function ContactForm() {
 
     setIsSubmitting(true);
     try {
-      // TODO(equipo): integrar POST /api/contacto cuando el contrato se implemente.
+      // El envío es simulado porque la consigna no pide un endpoint de contacto.
       await new Promise((resolve) => {
         setTimeout(resolve, 400);
       });
