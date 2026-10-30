@@ -6,8 +6,8 @@ En este sprint se implementó **persistencia de datos y CRUD completo**: la API 
 
 ## Despliegues (placeholders)
 
-- **Frontend (React):** https://TU-FRONTEND.vercel.app
-- **Backend (API):** https://TU-BACKEND.onrender.com
+- **Frontend (React):** https://muebleria-hermanos-jota-sprint-5-6.vercel.app
+- **Backend (API):** https://muebleria-jota-api-q4ez.onrender.com
 
 ## Arquitectura
 
@@ -24,25 +24,25 @@ En este sprint se implementó **persistencia de datos y CRUD completo**: la API 
 
 ## Stack
 
-| Capa        | Tecnologías                                                                 |
-| ----------- | ---------------------------------------------------------------------------- |
-| Frontend    | React (CRA), React Router DOM 6, Tailwind CSS, react-icons (`lucide-react`)  |
-| API         | Node.js 20+, Express 4, CORS, Helmet, dotenv, nodemon (dev)                  |
-| Datos       | Mongoose 8, MongoDB Atlas                                                    |
-| Calidad     | ESLint, Prettier, Jest + Supertest (API), React Testing Library (client)     |
+| Capa     | Tecnologías                                                                 |
+| -------- | --------------------------------------------------------------------------- |
+| Frontend | React (CRA), React Router DOM 6, Tailwind CSS, react-icons (`lucide-react`) |
+| API      | Node.js 20+, Express 4, CORS, Helmet, dotenv, nodemon (dev)                 |
+| Datos    | Mongoose 8, MongoDB Atlas                                                   |
+| Calidad  | ESLint, Prettier, Jest + Supertest (API), React Testing Library (client)    |
 
 ## Endpoints
 
 Base: `/api/productos` — Cuerpo de respuesta en errores: `{ "mensaje": "..." }`
 
-| Método | Ruta               | Descripción                        | Códigos de respuesta               |
-| ------ | ------------------ | ---------------------------------- | ---------------------------------- |
-| GET    | `/`                | Health check de la API             | 200                                |
-| GET    | `/api/productos`   | Lista todos los productos          | 200, 500                           |
-| GET    | `/api/productos/:id` | Detalle de un producto           | 200, 400 (id inválido), 404, 500   |
-| POST   | `/api/productos`   | Crea un producto                   | 201, 400 (validación), 500         |
-| PUT    | `/api/productos/:id` | Actualiza un producto            | 200, 400, 404, 500                 |
-| DELETE | `/api/productos/:id` | Elimina un producto              | 200, 400, 404, 500                 |
+| Método | Ruta                 | Descripción               | Códigos de respuesta             |
+| ------ | -------------------- | ------------------------- | -------------------------------- |
+| GET    | `/`                  | Health check de la API    | 200                              |
+| GET    | `/api/productos`     | Lista todos los productos | 200, 500                         |
+| GET    | `/api/productos/:id` | Detalle de un producto    | 200, 400 (id inválido), 404, 500 |
+| POST   | `/api/productos`     | Crea un producto          | 201, 400 (validación), 500       |
+| PUT    | `/api/productos/:id` | Actualiza un producto     | 200, 400, 404, 500               |
+| DELETE | `/api/productos/:id` | Elimina un producto       | 200, 400, 404, 500               |
 
 Modelo de datos (`Product`): `nombre` (required), `descripcion`, `precio` (required, min 0), `stock` (default 0, min 0), `imagenUrl`, más los `timestamps` de Mongoose (`createdAt` / `updatedAt`).
 
@@ -76,17 +76,17 @@ npm start -w hermanos-jota-client
 
 ### Backend (`backend/.env`)
 
-| Variable       | Descripción                                                                                     |
-| -------------- | ----------------------------------------------------------------------------------------------- |
-| `MONGODB_URI`  | Connection string de MongoDB Atlas (reemplazá `<password>` y el nombre de la base). Ej.: `mongodb+srv://usuario:password@cluster.mongodb.net/muebleria-jota?retryWrites=true&w=majority` |
-| `PORT`         | Puerto de la API (4000 por defecto).                                                            |
-| `CLIENT_URL`   | Origen del frontend permitido por CORS (en local: `http://localhost:3000`).                      |
+| Variable      | Descripción                                                                                                                                                                              |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MONGODB_URI` | Connection string de MongoDB Atlas (reemplazá `<password>` y el nombre de la base). Ej.: `mongodb+srv://usuario:password@cluster.mongodb.net/muebleria-jota?retryWrites=true&w=majority` |
+| `PORT`        | Puerto de la API (4000 por defecto).                                                                                                                                                     |
+| `CLIENT_URL`  | Origen del frontend permitido por CORS (en local: `http://localhost:3000`).                                                                                                              |
 
 ### Frontend (`client/.env`)
 
-| Variable             | Descripción                                                                   |
-| -------------------- | ----------------------------------------------------------------------------- |
-| `REACT_APP_API_URL`  | URL base de la API (en local: `http://localhost:4000`; en prod: URL de Render). |
+| Variable            | Descripción                                                                     |
+| ------------------- | ------------------------------------------------------------------------------- |
+| `REACT_APP_API_URL` | URL base de la API (en local: `http://localhost:4000`; en prod: URL de Render). |
 
 > El proyecto usa Create React App, por eso la variable usa el prefijo `REACT_APP_`.
 
@@ -106,13 +106,13 @@ npm start -w hermanos-jota-client
 3. **Build Command:** `npm install`
 4. **Start Command:** `npm start`
 5. En **Environment Variables** cargar `MONGODB_URI` (el string de Atlas) y `CLIENT_URL` (por ahora un placeholder; luego se actualiza con la URL de Vercel).
-6. Desplegar y probar: `https://TU-BACKEND.onrender.com/api/productos`.
+6. Desplegar y probar: `https://muebleria-jota-api-q4ez.onrender.com/api/productos`.
 
 ### 3) Vercel (frontend)
 
 1. Crear cuenta en [vercel.com](https://vercel.com) → **Add New → Project** → importar el repo.
 2. **Root Directory:** `client`
-3. En **Environment Variables** cargar `REACT_APP_API_URL` = `https://TU-BACKEND.onrender.com`.
+3. En **Environment Variables** cargar `REACT_APP_API_URL` = `https://muebleria-jota-api-q4ez.onrender.com`.
 4. Deploy: el `vercel.json` del client ya tiene el rewrite de SPA para React Router.
 
 ### 4) Volver a Render
