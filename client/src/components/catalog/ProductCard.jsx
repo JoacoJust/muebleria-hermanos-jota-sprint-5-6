@@ -40,9 +40,13 @@ export function ProductCard({
       </Link>
       <div className="flex flex-1 flex-col gap-3 p-6">
         <h2 className="font-display text-xl uppercase tracking-[0.1em] transition-colors duration-200">
-          <Link to={`/productos/${id}`} className="hover:text-brand-siena">{nombre}</Link>
+          <Link to={`/productos/${id}`} className="hover:text-brand-siena">
+            {nombre}
+          </Link>
         </h2>
-        <p className="flex-1 text-sm leading-relaxed text-brand-muted line-clamp-2">{descripcion}</p>
+        <p className="flex-1 text-sm leading-relaxed text-brand-muted line-clamp-2">
+          {descripcion}
+        </p>
         <div>
           {descuento > 0 ? (
             <p>
@@ -59,8 +63,8 @@ export function ProductCard({
             {enStock ? "✓ En stock" : "✗ Sin stock"}
           </p>
         </div>
-        <Button 
-          disabled={!enStock} 
+        <Button
+          disabled={!enStock}
           onClick={() => addToCart(producto)}
           className="transition-all duration-200 hover:shadow-md"
         >

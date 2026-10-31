@@ -18,16 +18,16 @@ Formato de error: `{ "mensaje": "..." }`.
 
 ## Esquema `Product` (Mongoose)
 
-| Campo         | Tipo     | Notas                                       |
-| ------------- | -------- | ------------------------------------------- |
-| `_id`         | ObjectId | Generado por MongoDB                        |
-| `nombre`      | string   | **required**, trimmed                       |
-| `descripcion` | string   | Trimmed                                     |
-| `precio`      | number   | **required**, min 0                         |
-| `stock`       | number   | Default 0, min 0                            |
-| `imagenUrl`   | string   | Ruta `/images/<archivo>` o URL externa      |
-| `createdAt`   | Date     | Timestamp de Mongoose                       |
-| `updatedAt`   | Date     | Timestamp de Mongoose                       |
+| Campo         | Tipo     | Notas                                  |
+| ------------- | -------- | -------------------------------------- |
+| `_id`         | ObjectId | Generado por MongoDB                   |
+| `nombre`      | string   | **required**, trimmed                  |
+| `descripcion` | string   | Trimmed                                |
+| `precio`      | number   | **required**, min 0                    |
+| `stock`       | number   | Default 0, min 0                       |
+| `imagenUrl`   | string   | Ruta `/images/<archivo>` o URL externa |
+| `createdAt`   | Date     | Timestamp de Mongoose                  |
+| `updatedAt`   | Date     | Timestamp de Mongoose                  |
 
 ---
 

@@ -24,12 +24,12 @@ En este sprint se implementó **persistencia de datos y CRUD completo**: la API 
 
 ## Stack
 
-| Capa     | Tecnologías                                                                 |
-| -------- | --------------------------------------------------------------------------- |
-| Frontend | React (CRA), React Router DOM 6, Tailwind CSS, react-icons (`lucide-react`) |
-| API      | Node.js 20+, Express 4, CORS, Helmet, dotenv, nodemon (dev)                 |
-| Datos    | Mongoose 8, MongoDB Atlas                                                   |
-| Calidad  | ESLint, Prettier, Jest + Supertest (API), React Testing Library (client)    |
+| Capa     | Tecnologías                                                              |
+| -------- | ------------------------------------------------------------------------ |
+| Frontend | React (CRA), React Router DOM 6, Tailwind CSS, lucide-react              |
+| API      | Node.js 20+, Express 4, CORS, Helmet, dotenv, nodemon (dev)              |
+| Datos    | Mongoose 8, MongoDB Atlas                                                |
+| Calidad  | ESLint, Prettier, Jest + Supertest (API), React Testing Library (client) |
 
 ## Endpoints
 
@@ -120,6 +120,10 @@ npm start -w hermanos-jota-client
 - En el servicio del backend, actualizar `CLIENT_URL` con la URL final del frontend y redeploy (si no, CORS bloquea las peticiones del browser).
 
 > **Nota importante:** el plan gratuito de Render **duerme** el servicio tras inactividad: la primera petición puede tardar ~50 s en responder. Si el catálogo carga vacío o con error al inicio, esperá y reintenta.
+
+## Tests
+
+Los tests del backend corren contra una base de datos en memoria con `mongodb-memory-server`.
 
 ## Estructura de carpetas
 

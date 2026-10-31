@@ -17,10 +17,14 @@ app.use(
   }),
 );
 
-// Orígenes permitidos: el del panel (.env) + los de desarrollo local.
+const allowedOrigins =
+  env.nodeEnv === "production"
+    ? [env.clientUrl]
+    : [env.clientUrl, "http://localhost:5173", "http://localhost:3000"];
+
 app.use(
   cors({
-    origin: [env.clientUrl, "http://localhost:5173", "http://localhost:3000"],
+    origin: allowedOrigins,
   }),
 );
 

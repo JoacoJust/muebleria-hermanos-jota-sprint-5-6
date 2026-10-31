@@ -13,6 +13,15 @@ export function getShipping(subtotal) {
 }
 
 export function imageUrl(path) {
-  const base = process.env.REACT_APP_API_URL || "";
-  return `${base}${path}`;
+  if (!path) {
+    return "/logo.svg";
+  }
+
+  if (/^(https?:\/\/|\/\/|data:|blob:)/i.test(path)) {
+    return path;
+  }
+
+  const base = (process.env.REACT_APP_API_URL || "").replace(/\/+$/, "");
+  const relativePath = path.startsWith("/") ? path : `/${path}`;
+  return `${base}${relativePath}`;
 }

@@ -28,7 +28,10 @@ export function Home() {
             Diseñamos y fabricamos en Buenos Aires piezas pensadas para durar, con maderas nativas y
             acabados naturales.
           </p>
-          <Button className="mt-8 bg-brand-alabastro text-brand-siena hover:bg-white hover:shadow-lg" to="/productos">
+          <Button
+            className="mt-8 bg-brand-alabastro text-brand-siena hover:bg-white hover:shadow-lg"
+            to="/productos"
+          >
             Ver catálogo
           </Button>
         </div>

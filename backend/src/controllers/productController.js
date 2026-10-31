@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const Product = require("../models/Product");
 
+function extraerCampos(body) {
+  const { nombre, descripcion, precio, stock, imagenUrl } = body || {};
+  return { nombre, descripcion, precio, stock, imagenUrl };
+}
+
 /** Extrae el primer mensaje de validación de un ValidationError de Mongoose. */
 function mensajeDeValidacion(error) {
   if (error && error.name === "ValidationError" && error.errors) {
@@ -42,7 +47,7 @@ async function getProductoById(req, res) {
 
 async function crearProducto(req, res) {
   try {
-    const producto = await Product.create(req.body);
+    const producto = await Product.create(extraerCampos(req.body));
     res.status(201).json(producto);
   } catch (error) {
     if (error.name === "ValidationError") {
@@ -62,7 +67,7 @@ async function actualizarProducto(req, res) {
       return;
     }
 
-    const producto = await Product.findByIdAndUpdate(id, req.body, {
+    const producto = await Product.findByIdAndUpdate(id, extraerCampos(req.body), {
       new: true,
       runValidators: true,
     });

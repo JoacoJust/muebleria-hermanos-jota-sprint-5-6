@@ -76,12 +76,10 @@ describe("API Mueblería Jota", () => {
 
   test("POST /api/productos con validación inválida responde 400 con mensaje de Mongoose", async () => {
     const Product = require("../src/models/Product");
-    jest
-      .spyOn(Product, "create")
-      .mockRejectedValueOnce({
-        name: "ValidationError",
-        errors: { nombre: { message: "El nombre es obligatorio" } },
-      });
+    jest.spyOn(Product, "create").mockRejectedValueOnce({
+      name: "ValidationError",
+      errors: { nombre: { message: "El nombre es obligatorio" } },
+    });
 
     const res = await request(app).post("/api/productos").send({ precio: 100 });
     expect(res.status).toBe(400);

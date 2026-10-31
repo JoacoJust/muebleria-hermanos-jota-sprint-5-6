@@ -5,7 +5,15 @@ import { Button } from "../ui/Button";
 import { ErrorMessage } from "../ui/ErrorMessage";
 import { Spinner } from "../ui/Spinner";
 
-export function ProductDetail({ producto, loading, error, notFound, onRetry, addToCart, acciones = null }) {
+export function ProductDetail({
+  producto,
+  loading,
+  error,
+  notFound,
+  onRetry,
+  addToCart,
+  acciones = null,
+}) {
   const [qty, setQty] = useState(1);
 
   // Renderizado condicional: loading → error → notFound → detalle
@@ -41,7 +49,9 @@ export function ProductDetail({ producto, loading, error, notFound, onRetry, add
       />
       <div>
         {producto.categoria ? (
-          <p className="text-sm uppercase tracking-[0.08em] text-brand-muted">{producto.categoria}</p>
+          <p className="text-sm uppercase tracking-[0.08em] text-brand-muted">
+            {producto.categoria}
+          </p>
         ) : null}
         <h1 className="mt-2 font-display text-4xl uppercase tracking-[0.1em]">{producto.nombre}</h1>
         <p className="mt-4 leading-relaxed">{producto.descripcion}</p>
@@ -50,7 +60,9 @@ export function ProductDetail({ producto, loading, error, notFound, onRetry, add
           <p className="text-brand-muted line-through">{formatCurrency(producto.precio)}</p>
         ) : null}
         <p className="mt-2">
-          {producto.enStock ? `Stock disponible: ${producto.stock ?? producto.cantidad}` : "Sin stock"}
+          {producto.enStock
+            ? `Stock disponible: ${producto.stock ?? producto.cantidad}`
+            : "Sin stock"}
         </p>
 
         {acciones ? <div className="mt-6 flex flex-wrap gap-3">{acciones}</div> : null}
