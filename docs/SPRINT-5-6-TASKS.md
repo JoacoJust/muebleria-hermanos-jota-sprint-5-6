@@ -15,8 +15,8 @@ Objetivo cumplido: "Persistencia de Datos y CRUD Completo" — API Express conec
 
 | Verificación                                                                                                   | Resultado                                                                                        |
 | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Jest backend (11 tests)                                                                                        | 11/11 ✅                                                                                         |
-| Jest cliente (29 tests)                                                                                        | 29/29 ✅                                                                                         |
+| Jest backend (15 tests)                                                                                        | 15/15 ✅                                                                                         |
+| Jest cliente (38 tests)                                                                                        | 38/38 ✅                                                                                         |
 | `npm run build` (client)                                                                                       | Compiled successfully ✅                                                                         |
 | ESLint                                                                                                         | 0 errores ✅                                                                                     |
 | Arranque falla limpio sin DB                                                                                   | mensaje claro + exit 1 ✅                                                                        |
