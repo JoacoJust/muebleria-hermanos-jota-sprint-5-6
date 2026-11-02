@@ -25,13 +25,13 @@ Objetivo cumplido: "Persistencia de Datos y CRUD Completo" — API Express conec
 | POST válido (201) / POST sin nombre (400) / PUT (200) / PUT precio negativo (400) / DELETE (200, repetido 404) | ✅ vía curl en vivo                                                                              |
 | **Ciclo completo UI → API → DB en navegador**                                                                  | crear (POST 201 + navigate) / editar (PUT + detalle precargado) / eliminar (confirm + DELETE) ✅ |
 
-## Pendiente del dueño del proyecto (requiere cuentas propias)
+## Estado del despliegue
 
-- [ ] Cluster MongoDB Atlas → reemplazar `MONGODB_URI` en `backend/.env`
-- [ ] Crear servicio en Render (root `backend`; vars `MONGODB_URI`, `CLIENT_URL`)
-- [ ] Importar proyecto en Vercel (root `client`; var `REACT_APP_API_URL=https://tu-backend.onrender.com`)
-- [ ] Actualizar `CLIENT_URL` en Render con la URL final de Vercel
-- [ ] Reemplazar placeholders de links en README.md
+- [x] Frontend publicado en Vercel: https://muebleria-hermanos-jota-sprint-5-6.vercel.app
+- [x] Backend publicado en Render: https://muebleria-jota-api-q4ez.onrender.com
+- [x] Verificación HTTP del frontend y `GET /api/productos` realizada el 1 de noviembre de 2026.
+
+La configuración de producción (por ejemplo, `MONGODB_URI` y `CLIENT_URL`) se administra en el panel del proveedor y no se incluye en el repositorio. Para repetir el despliegue, seguir los pasos de la sección **Deploy paso a paso** del README.
 
 ## Adaptaciones respecto al documento original del sprint
 

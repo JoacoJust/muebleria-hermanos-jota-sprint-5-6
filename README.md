@@ -9,6 +9,8 @@ En este sprint se implementó **persistencia de datos y CRUD completo**: la API 
 - **Frontend (Vercel):** https://muebleria-hermanos-jota-sprint-5-6.vercel.app
 - **Backend (Render):** https://muebleria-jota-api-q4ez.onrender.com
 
+El frontend y el endpoint público del catálogo fueron comprobados el **1 de noviembre de 2026**. El servicio gratuito de Render puede tardar en responder después de un período sin actividad.
+
 ## Arquitectura
 
 ```
@@ -51,17 +53,18 @@ Modelo de datos (`Product`): `nombre` (required), `descripcion`, `precio` (requi
 Requisitos: Node.js 20+ y npm.
 
 ```bash
-# 1. Clonar e instalar (monorepo npm con workspaces)
-git clone <url-del-repo>
-cd muebleria-hermanos-jota
+# Ejecutá los siguientes comandos desde la raíz del repositorio ya clonado.
 npm install
 
-# 2. Base de datos local
+# 2. Configurar los servicios
 #    backend/.env debe contener un MONGODB_URI válido (puede ser Atlas o local).
-#    Dejamos backend/.env.example para copiar:
+#    client/.env define la URL de la API. Los ejemplos están versionados y no
+#    contienen credenciales:
 cp backend/.env.example backend/.env   # luego editá MONGODB_URI
+cp client/.env.example client/.env
 
 # 3. Cargar datos de ejemplo (vacía la colección y carga 8 productos)
+#    Atención: seed elimina los productos existentes de esa base antes de cargar.
 npm run seed -w hermanos-jota-backend
 
 # 4. Levantar los dos servicios
@@ -123,7 +126,22 @@ npm start -w hermanos-jota-client
 
 ## Tests
 
-Los tests del backend corren contra una base de datos en memoria con `mongodb-memory-server`.
+Los tests del backend corren contra una base de datos en memoria con `mongodb-memory-server`; no necesitan conectarse a MongoDB Atlas. Desde la raíz del monorepo:
+
+```bash
+npm test          # Tests de backend y cliente
+npm run lint      # ESLint
+npm run build     # Build de producción del cliente
+```
+
+Para correr una suite por separado:
+
+```bash
+npm test -w hermanos-jota-backend
+npm test -w hermanos-jota-client
+```
+
+El flujo de integración continua ejecuta instalación, lint, tests y build en cada push a `main` y en cada pull request.
 
 ## Estructura de carpetas
 
